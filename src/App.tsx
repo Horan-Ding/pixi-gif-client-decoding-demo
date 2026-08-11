@@ -79,22 +79,17 @@ interface MetricsStore extends RuntimeMetrics {
   mainWorkMs: number
 }
 
-const gifParts = (name: string, count: number) => Array.from(
-  { length: count },
-  (_, index) => `${import.meta.env.BASE_URL}gifs/${name}.part${index.toString().padStart(2, '0')}`,
-)
-
 const GIFS: GifAsset[] = [
   {
     id: 'image31',
     label: 'image31.GIF',
-    files: gifParts('image31.GIF', 42),
+    files: [`${import.meta.env.BASE_URL}gifs/image31.GIF`],
     sizeLabel: '20.6 MB',
   },
   {
     id: 'image32',
     label: 'image32.GIF',
-    files: gifParts('image32.GIF', 18),
+    files: [`${import.meta.env.BASE_URL}gifs/image32.GIF`],
     sizeLabel: '8.7 MB',
   },
 ]

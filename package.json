@@ -5,7 +5,9 @@
   "description": "PIXI.js single-texture GIF playback with Worker decoding and browser performance telemetry",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/assemble-gifs.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/assemble-gifs.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

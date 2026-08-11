@@ -7,8 +7,8 @@
 ## 实现方式
 
 ```text
-GIF 压缩字节（Pages 中按 500 KB 分片）
-  -> Web Worker 并行 fetch + 字节拼接
+单个 GIF 文件
+  -> Web Worker fetch
   -> omggif 增量解码
   -> RGBA 合成缓冲（处理 disposal 2/3）
   -> 最多提前准备一个 ImageBitmap
@@ -19,7 +19,7 @@ GIF 压缩字节（Pages 中按 500 KB 分片）
 
 这里不会像 `PIXI.AnimatedSprite` 或 `@pixi/gif` 那样把全部 GIF 帧预先展开成一组 Texture。播放器始终只有一个 Sprite 和一个可变 Texture；代价是每帧仍需要将解码后的像素上传到 GPU。
 
-GitHub connector 对单次文件写入有请求体限制，因此 Pages 仓库将每个 GIF 仅按传输字节分片。Worker 拼接后得到的字节与原始 GIF 完全一致；分片不是预解码帧，也不会增加 PIXI Texture 数量。实际产品 CDN 可以直接提供单个 GIF URL。
+GitHub connector 对单次文件写入有请求体限制，因此源码仓库将每个 GIF 仅按传输字节分片。`prebuild` 在 Actions 中先按顺序重建原始 `.GIF`，Pages 产物和浏览器运行时仍然是一张 GIF 对应一个 URL。分片不是预解码帧，也不会增加 PIXI Texture 数量。
 
 ## 性能指标
 

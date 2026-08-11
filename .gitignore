@@ -15,6 +15,7 @@ dist-ssr
 # Unused Vite starter assets kept out of the demo repository
 src/assets/
 public/icons.svg
+public/gifs/*.GIF
 
 # Editor directories and files
 .vscode/*
